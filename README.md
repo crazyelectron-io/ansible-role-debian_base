@@ -2,12 +2,46 @@
 
 Ansible role for setup of a freshly installed Debian 11 server (non-GUI).
 
-> This role is highly opinionated and fits my way of working.
-> It may not be suitable for your needs.
+> Be aware that this role is highly opinionated and fits my way of working.
+> It may or may not be suitable for your needs.
 
-## Mandatory variables
+## Role variables
 
-`main_domain` must be defined for ther hosts file
+### Mandatory variables
+
+`main_domain` must be defined tocreate an entry in the Debian `/etc/hosts` file.
+
+`shell_user` must be defined for user-based configuration (like ZSH, Locale, etc.).
+
+These variables can be specified in the `hosts.yaml` inventory file or in the `vars`section of an Ansible playbook, like this:
+
+```yaml
+- hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    main_domain: example.com
+    shell_user: myuser
+  roles:
+    - debian-base
+  ...
+```
+
+### Important optional parameters (with defaults)
+
+`install_in_vm: true` - Indicate of we install in a VM and need to add the QEMU agent.
+
+`install_p10k: false` - Indicates if p10k should be installed on top of ZSH.
+
+`install_lh_prereq: false` - Indicated is the Longhorn prerequisites must be installed.
+
+`install_neofetch: false` - Indicates if we want to have a fancy login/MOTD screen.
+
+`install_locale: "en_US.UTF-8"` - Specifies the locale the set for the shell user (blank will not set the locale).
+
+`system_timezone: Europe/Amsterdam` - Specify your own time zone.
+
+`
 
 ## Usage of this role
 
@@ -23,7 +57,7 @@ To use this role, include the following section in a `requirements.yml` file in 
 
 > Only include the 'top' roles, dependencies  -when listed in `meta/main.yml` of the role - will be downloaded automatically.
 
-To retrieve the roles linke this in your project, run `ansible-galaxy install -r roles/requirements`.
+To retrieve the roles linke this in your project, run `ansible-galaxy install -r roles/requirements.yml`.
 Because these roles will not be updated locally when changed, to refresh an already retrieved role, run `ansible-galaxy -f -r roles/requirements.yml`
 
 ## Suggested project structure
@@ -62,7 +96,7 @@ Create `roles/.gitignore`:
 !localy_versionned_role*/
 ```
 
-Add `roles_path` to `ansible.cfg` to make sure that roles are searched and downloaded in our local folder.
+Add `roles_path = roles` to `ansible.cfg` to make sure that roles are searched and downloaded in our local folder.
 
 ### Workflow to deploy from the project
 

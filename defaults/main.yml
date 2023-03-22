@@ -16,11 +16,11 @@ install_neofetch: false
 # The locale the set for the ansible user *blank will not set the locale)
 my_locale: "en_US.UTF-8"
 
+# Set the required timezone
+system_timezone: Europe/Amsterdam
+
 # NTP Pool to use
 ntp_pool: pool.ntp.org
-
-# The top-level domain name for this system
-# main_domain: crazyelectron.io
 
 # Default set of Debian packages to install
 debian_packages:
