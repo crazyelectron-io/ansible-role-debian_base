@@ -1,5 +1,5 @@
 ---
-- name: Update Derbian packages
+- name: Update Debian packages
   ansible.builtin.include_role: debian-upgrade
 
 - name: Deploy base Debian packages
