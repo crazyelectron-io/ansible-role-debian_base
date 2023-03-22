@@ -1,8 +1,8 @@
 # role-debian_base
 
-Ansible role for setup of a freshly installed Debian 11 server (non-GUI).
+Ansible role to setup a 'freshly' installed Debian 11 server (non-GUI).
 
-> Be aware that this role is highly opinionated and fits my way of working.
+> Be aware that this role is highly opinionated and fits my preferences and way of working.
 > It may or may not be suitable for your needs.
 
 ## Role variables
@@ -56,7 +56,7 @@ To use this role, include the following section in a `requirements.yml` file in 
 > Only include the 'top' roles, dependencies  -when listed in `meta/main.yml` of the role - will be downloaded automatically.
 
 To retrieve the roles linke this in your project, run `ansible-galaxy install -r roles/requirements.yml`.
-Because these roles will not be updated locally when changed, to refresh an already retrieved role, run `ansible-galaxy -f -r roles/requirements.yml`
+Because these roles will not be updated locally when changed, to refresh an already retrieved role, run `ansible-galaxy install -f -r roles/requirements.yml`
 
 ## Suggested project structure
 
