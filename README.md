@@ -114,4 +114,4 @@ Add `roles_path = roles` to `ansible.cfg` to make sure that roles are searched a
 
 1. Clone the project repository
 2. Download the external roles: `ansible-galaxy install -r roles/requirements`
-3. Launch your playbook: `ansible-playbook -i inventories/dev some_playbook.yml`
+3. Launch your playbook: `ansible-playbook -i inventories/dev some_playbook.yml -u ANSIBLE_USER`
