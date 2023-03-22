@@ -85,6 +85,9 @@
 
 - import_tasks: enable-yama.yaml
 
+- ansible.builtin.include_role:
+    name: reboot
+
 # TODO: echo \"Samsung SSD 870 QVO 8TB\" 190 C \"Samsung SSD 870 QVO 8TB\" | sudo tee -a /etc/hddtemp.db
 # - name: Add Samsung SSD to hddtemp database
 #   ansible.builtin.lineinfile:

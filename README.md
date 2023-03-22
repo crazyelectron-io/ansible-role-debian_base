@@ -38,7 +38,7 @@ all:
     ...
   children:
   ...
-``
+```
 
 ### Important optional parameters (with defaults)
 
@@ -50,7 +50,7 @@ all:
 
 `install_neofetch: false` - Indicates if we want to have a fancy login/MOTD screen.
 
-`install_locale: "en_US.UTF-8"` - Specifies the locale the set for the shell user (blank will not set the locale).
+`install_locale: en_US.UTF-8` - Specifies the locale the set for the shell user (blank will not set the locale).
 
 `system_timezone: Europe/Amsterdam` - Specify the correct time zone.
 
@@ -71,15 +71,20 @@ To use this role, include the following section in a `requirements.yml` file in 
 To retrieve roles like this in your project, run `ansible-galaxy install -r roles/requirements.yml`.
 Because these roles will not be updated locally when the repository is changed, to refresh an already retrieved role use `ansible-galaxy install -f -r roles/requirements.yml`
 
+## Dependencies
+
+This role depends on the `reboot` role which is specified as dependency and included automatically.
+
 ## Suggested project structure
 
+```shell
 ├── inventories
 │   ├── dev
 │   │   ├── group_vars/
-│   │   └── hosts.ini
+│   │   └── hosts.yml
 │   └── prod
 │       ├── group_vars/
-│       └── hosts.ini
+│       └── hosts.yml
 ├── group_vars/
 ├── host_vars/
 ├── files/
@@ -94,10 +99,11 @@ Because these roles will not be updated locally when the repository is changed, 
 ├── README.md
 ├── some_playbook.yml
 ├── other_playbook.yml
+```
 
-Create `roles/.gitignore`:
+Create a `roles/.gitignore` file to exclude the downloaded roles:
 
-```gitignore
+```ini
 #Ignore everything in roles dir...
 /*
 # ... but current file...
