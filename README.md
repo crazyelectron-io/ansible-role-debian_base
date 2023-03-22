@@ -9,9 +9,9 @@ Ansible role to setup a 'freshly' installed Debian 11 server (non-GUI).
 
 ### Mandatory variables
 
-`main_domain` must be defined tocreate an entry in the Debian `/etc/hosts` file.
+`main_domain` _must_ be defined to create an entry in the Debian `/etc/hosts` file.
 
-`shell_user` must be defined for user-based configuration (like ZSH, Locale, etc.).
+`shell_user` _must_ be defined for user-based configuration (like ZSH, Locale, etc.).
 
 These variables can be specified in the `hosts.yaml` inventory file or in the `vars`section of an Ansible playbook, like this:
 
@@ -27,7 +27,7 @@ These variables can be specified in the `hosts.yaml` inventory file or in the `v
   ...
 ```
 
-In an inventory file:
+O in an inventory file:
 
 ```yaml
 ---
