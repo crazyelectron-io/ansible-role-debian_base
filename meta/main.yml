@@ -18,3 +18,5 @@ galaxy_info:
 dependencies:
 - src: git+https://github.com/crazyelectron-io/role-reboot.git
   name: reboot
+- src: git+https://github.com/crazyelectron-io/role-debian_update.git
+  name: debian-update

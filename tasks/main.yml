@@ -1,18 +1,6 @@
 ---
-- name: Upgrade Debian packages
-  block:
-    - name: Upgrade all packages to the latest version
-      apt:
-        name: '*'
-        state: latest
-        update_cache: yes
-      register: apt_result
-      until: "apt_result is not failed"
-      retries: 5
-      delay: 15
-  rescue:
-  - ansible.builtin.shell: |
-      dpkg --configure -a
+- name: Update Derbian packages
+  ansible.builtin.include_role: debian-upgrade
 
 - name: Deploy base Debian packages
   ansible.builtin.package:
@@ -26,7 +14,7 @@
 
 - name: Set local timezone
   timezone:
-    name: Europe/Amsterdam
+    name: "{{ system_timezone }}"
 
 - name: Configure locale (if specified)
   block:
