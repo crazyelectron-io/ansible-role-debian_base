@@ -27,6 +27,19 @@ These variables can be specified in the `hosts.yaml` inventory file or in the `v
   ...
 ```
 
+In an inventory file:
+
+```yaml
+---
+all:
+  vars:
+    main_domain: example.com
+    shell_user: myuser
+    ...
+  children:
+  ...
+``
+
 ### Important optional parameters (with defaults)
 
 `install_in_vm: true` - Indicate of we install in a VM and need to add the QEMU agent.
