@@ -39,24 +39,24 @@ These variables can be specified in the `hosts.yaml` inventory file or in the `v
 
 `install_locale: "en_US.UTF-8"` - Specifies the locale the set for the shell user (blank will not set the locale).
 
-`system_timezone: Europe/Amsterdam` - Specify your own time zone.
+`system_timezone: Europe/Amsterdam` - Specify the correct time zone.
 
 ## Usage of this role
 
-To use this role, include the following section in a `requirements.yml` file in your local `roles` directory:
+To use this role, include the following section in a `requirements.yml` file in the local `roles` directory:
 
 ```yaml
-# Include my 'debian-base` role from GitHub
+# Include the 'debian-base` role from GitHub
 - src: git@github.com:crazyelectron-io/role-debian_base.git
   scm: git
   version: master
   name: debian-base
 ```
 
-> Only include the 'top' roles, dependencies  -when listed in `meta/main.yml` of the role - will be downloaded automatically.
+> Only include the 'top' roles, dependencies - when listed in `meta/main.yml` of the imported role - will be downloaded automatically.
 
-To retrieve the roles linke this in your project, run `ansible-galaxy install -r roles/requirements.yml`.
-Because these roles will not be updated locally when changed, to refresh an already retrieved role, run `ansible-galaxy install -f -r roles/requirements.yml`
+To retrieve roles like this in your project, run `ansible-galaxy install -r roles/requirements.yml`.
+Because these roles will not be updated locally when the repository is changed, to refresh an already retrieved role use `ansible-galaxy install -f -r roles/requirements.yml`
 
 ## Suggested project structure
 

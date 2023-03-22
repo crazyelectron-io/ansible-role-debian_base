@@ -1,5 +1,6 @@
+# file: debian-base/tasks/p10k-install.yml
+# synopsis: install powerlevel10k
 ---
-# Install powerlevel10k
 - name: Ensure dependencies are installed
   package:
     name: "{{ p10k_dependencies }}"
