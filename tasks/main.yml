@@ -59,28 +59,34 @@
 
 - name: Install and configure p10k
   block:
-  - include_tasks: "p10k-install.yml"
-  - include_tasks: "p10k-fonts.yml"
-  - include_tasks: "p10k-configure.yml"
-  - name: P10K | Enable Neofetch
-    ansible.builtin.blockinfile:
-      path: "{{ p10k_zshrc_config[zsh_plugin]['zsh_file'] }}"
-      block: |
-        # Run neofetch at login and before Powerlevel10k instant prompt
-        neofetch
-      insertbefore: BOF
-      marker_begin: "BEGIN NEOFETCH CONFIG FILE"
-      marker_end: "END NEOFETCH CONFIG FILE"
-      state: present
-    become: true
-    become_user: "{{ shell_user }}"
-    when: install_neofetch
+    - include_tasks: "p10k-install.yml"
+    - include_tasks: "p10k-fonts.yml"
+    - include_tasks: "p10k-configure.yml"
   when: install_p10k
+
+- name: Install Neofetch
+  ansible.builtin.package:
+    name: neofetch
+    state: present
+  when: install_neofetch
+- name: Enable Neofetch
+  ansible.builtin.blockinfile:
+    path: "{{ p10k_zshrc_config[zsh_plugin]['zsh_file'] }}"
+    block: |
+      # Run neofetch at login and before Powerlevel10k instant prompt
+      neofetch
+    insertbefore: BOF
+    marker_begin: "BEGIN NEOFETCH CONFIG FILE"
+    marker_end: "END NEOFETCH CONFIG FILE"
+    state: present
+  become: true
+  become_user: "{{ shell_user }}"
+  when: install_neofetch
 
 - import_tasks: enable-yama.yaml
 
+# TODO: echo \"Samsung SSD 870 QVO 8TB\" 190 C \"Samsung SSD 870 QVO 8TB\" | sudo tee -a /etc/hddtemp.db
 # - name: Add Samsung SSD to hddtemp database
-# # TODO: echo \"Samsung SSD 870 QVO 8TB\" 190 C \"Samsung SSD 870 QVO 8TB\" | sudo tee -a /etc/hddtemp.db
 #   ansible.builtin.lineinfile:
 #     path: /etc/hddtemp.db
 #     regexp: '^870 QVO 8TB'
