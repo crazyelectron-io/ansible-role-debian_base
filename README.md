@@ -27,7 +27,7 @@ These variables can be specified in the `hosts.yaml` inventory file or in the `v
   ...
 ```
 
-O in an inventory file:
+Or in an inventory file:
 
 ```yaml
 ---
