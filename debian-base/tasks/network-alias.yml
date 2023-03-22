@@ -1,0 +1,16 @@
+# file: debian-base/tasks/network-alias.yml
+# synopsis: 
+---
+- name: Remove network alias in Proxmox VM
+  block:
+  - ansible.builtin.file:
+      path: /run/network/ifstate.ens18
+      state: absent
+    notify:
+      - reboot vm
+  - ansible.builtin.file:
+      path: /run/network/interfaces.d/ens18
+      state: absent
+    notify:
+      - reboot vm
+  when: install_in_vm

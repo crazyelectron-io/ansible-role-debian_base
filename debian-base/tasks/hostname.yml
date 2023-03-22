@@ -1,0 +1,17 @@
+# file: debian-base/tasks/hostname.yml
+# synopsis: set the hostname and hosts file
+---
+- name: Set the hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+    use: systemd
+  register: new_hostname
+  notify:
+    - reboot vm
+
+- name: Ensure hostname is in the hosts file
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    state: present
+    regexp: "{{ inventory_hostname }}"
+    line: '127.0.1.1 {{ inventory_hostname }}.{{ main__domain }} {{ inventory_hostname }}'
