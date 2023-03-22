@@ -14,4 +14,4 @@
     path: /etc/hosts
     state: present
     regexp: "{{ inventory_hostname }}"
-    line: '127.0.1.1 {{ inventory_hostname }}.{{ main__domain }} {{ inventory_hostname }}'
+    line: '127.0.1.1 {{ inventory_hostname }}.{{ main_domain }} {{ inventory_hostname }}'

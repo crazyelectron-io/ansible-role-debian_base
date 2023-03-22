@@ -72,7 +72,7 @@ Because these roles will not be updated locally when the repository is changed, 
 ├── files/
 ├── templates/
 ├── roles
-│   ├── localy_versionned_role1/
+│   ├── local/locally_created_role1/
 │   ├── localy_versionned_role2/
 │   ├── requirements.yml
 │   ├── .gitignore
