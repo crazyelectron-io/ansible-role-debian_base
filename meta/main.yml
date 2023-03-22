@@ -1,3 +1,18 @@
 # file: meta/main.yml
 # synopsis: define dependencies
 ---
+galaxy_info:
+  role_name: debian_base
+  author: crazyelectron-io
+  description: Setuo the basic packages and configuration of a 'bare' Debian 11 installation (with just SSH and sudo enabled)
+  company: clouds_more
+  license: license (GPLv3)
+  min_ansible_version: '2.9'
+  platforms:
+    - name: Debian
+      versions:
+        - bullseye
+  galaxy_tags:
+    - debian
+
+dependencies: []

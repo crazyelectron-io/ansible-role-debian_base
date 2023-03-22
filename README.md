@@ -41,8 +41,6 @@ These variables can be specified in the `hosts.yaml` inventory file or in the `v
 
 `system_timezone: Europe/Amsterdam` - Specify your own time zone.
 
-`
-
 ## Usage of this role
 
 To use this role, include the following section in a `requirements.yml` file in your local `roles` directory:
