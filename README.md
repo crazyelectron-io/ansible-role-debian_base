@@ -85,8 +85,9 @@ Because these roles will not be updated locally when the repository is changed, 
 ├── files/
 ├── templates/
 ├── roles
-│   ├── local/locally_created_role1/
-│   ├── localy_versionned_role2/
+│   ├── local
+│   │   ├── local_role1/
+│   │   └── local_role2/
 │   ├── requirements.yml
 │   ├── .gitignore
 ├── ansible.cfg
@@ -97,14 +98,14 @@ Because these roles will not be updated locally when the repository is changed, 
 Create `roles/.gitignore`:
 
 ```gitignore
-#Ignore everything in dir...
+#Ignore everything in roles dir...
 /*
 # ... but current file...
 !.gitignore
 # ... external role requirement file
 !requirements.yml
 # ... and configured custom/local roles
-!localy_versionned_role*/
+!local*/
 ```
 
 Add `roles_path = roles` to `ansible.cfg` to make sure that roles are searched and downloaded in our local folder.
