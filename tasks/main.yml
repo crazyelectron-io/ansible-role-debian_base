@@ -1,6 +1,7 @@
 ---
 - name: Update Debian packages
-  ansible.builtin.include_role: debian-upgrade
+  ansible.builtin.include_role:
+    name: debian-upgrade
 
 - name: Deploy base Debian packages
   ansible.builtin.package:
