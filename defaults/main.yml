@@ -1,8 +1,11 @@
 # file: debian_base/default/main.yaml
 # synopsis: defaults file for debian-base
 ---
-# Are we installing in a Proxmox VM?
-install_in_vm: true
+# Upgrade Debian packages
+upgrade_debian: true
+
+# Are we installing in a KVM VM (to install the QEMU agent)?
+install_in_vm: false
 
 # Install optional Longhorn prerequisites
 install_lh_prereq: false
@@ -29,8 +32,10 @@ debian_packages:
   - zip
   - mc
   - nmap
+  - tcpdump
   - software-properties-common
   - neovim
+  - gnupg
   - lshw
   - parted
   - ifenslave
@@ -40,7 +45,17 @@ debian_packages:
   - firmware-linux-nonfree
   - acl
   - whois
-  - python3-pip
+  - ufw
+  # - python3-pip
+  # - apache2-utils
+
+# Debian packages for reading hardware sensors
+sensor_packages:
+  - smartmontools
+  - lm-sensors
+
+# Change the hostname
+set_hostname: false
 
 # Powerlevel10k Git repository url
 p10k_repository_url: 'https://github.com/romkatv/powerlevel10k.git'

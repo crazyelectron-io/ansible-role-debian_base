@@ -1,3 +1,6 @@
+# file: tasks/disable-yama.yaml
+# synopsis: disable ptrace usage
+---
 - name: Disable PTRACE
   ansible.posix.sysctl:
     name: kernel.yama.ptrace_scope

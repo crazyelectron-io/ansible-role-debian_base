@@ -1,0 +1,51 @@
+# file: roles/sensors/tasks/main.yaml
+# synopsis: install hardware sensor modules and tools
+---
+- name: Install hardware sensor packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ sensor_packages }}"
+
+# hddtemp package is not yet in Bookworm repo
+# - name: Get Bookworm package for hddtemp
+#   ansible.builtin.get_url:
+#     url: http://ftp.nl.debian.org/debian/pool/main/h/hddtemp/hddtemp_0.3-beta15-54_amd64.deb
+#     dest: /tmp
+# - name: Install hddtemp package
+#   ansible.builtin.apt:
+#     deb: /tmp/hddtemp_0.3-beta15-53_amd64.deb
+# - name: Add Samsung SSDs to hddtemp database
+#   block:
+#     - name: Add Samsung 870 EVO SSD to hddtemp database
+#       ansible.builtin.lineinfile:
+#         path: /etc/hddtemp.db
+#         regexp: '^870 QVO 8TB'
+#         line: \"Samsung SSD 870 QVO 8TB\" 190 C \"Samsung SSD 870 QVO 8TB\"
+#     - name: Add Samsung 890 Pro SSD tp hddtemp database
+#       ansible.builtin.lineinfile:
+#         path: /etc/hddtemp.db
+#         regexp: '^890 PRO 1TB'
+#         line: \"Samsung SSD 980 PRO 1TB\" 190 C \"Samsung SSD 980 PRO 1TB\"
+#   when: samsung_ssd_db
+
+- name: Load sensor modules
+  block:
+    - name: Load drivetemp module
+      community.general.modprobe:
+        name: drivetemp
+        state: present
+    - name: Make drivetemp module permanent
+      ansible.builtin.lineinfile:
+        path: /etc/modules
+        regexp: '^drivetemp'
+        line: drivetemp
+    - name: Load coretemp module
+      community.general.modprobe:
+        name: coretemp
+        state: present
+    - name: Make coretemp module permanent
+      ansible.builtin.lineinfile:
+        path: /etc/modules
+        regexp: '^coretemp'
+        line: coretemp

@@ -1,0 +1,8 @@
+# file: roles/debian-base/tasks/install-qemu-agent.yaml
+# synopsis: Optionally install the QEMU agent when running inside KVM VM
+---
+- name: QEMU | Install guest agent
+  package:
+    name: 'qemu-guest-agent'
+    state: present
+  when: install_in_vm
