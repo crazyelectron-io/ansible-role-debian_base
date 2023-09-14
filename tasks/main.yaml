@@ -47,8 +47,7 @@
 
 - import_tasks: sensors.yaml
 
-- import_tasks: 
-    - install-ufw.yaml
+- import_tasks: install-ufw.yaml
 
 - name: P10k | Include p10k prompt style variables
   include_vars: "{{ p10k_style[p10k_prompt_style] }}.yml"
