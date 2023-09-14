@@ -41,10 +41,13 @@
 - import_tasks: install-lh-prereq.yaml
   when: install_lh_prereq
 
-- import_tasks:
-    - disable-ipv6.yaml
-    - disable-yama.yaml
-    - sensors.yaml
+- import_tasks: disable-ipv6.yaml
+
+- import_tasks: disable-yama.yaml
+
+- import_tasks: sensors.yaml
+
+- import_tasks: 
     - install-ufw.yaml
 
 - name: P10k | Include p10k prompt style variables
