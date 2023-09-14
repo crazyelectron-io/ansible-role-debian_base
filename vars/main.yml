@@ -1,8 +1,6 @@
 # file: debian-base/vars/main.yaml
 # synopsis: global vars file for debian_base role
 ---
-shell_group: '{{ shell_user }}'
-
 p10k_dependencies:
   - zsh
   - git
