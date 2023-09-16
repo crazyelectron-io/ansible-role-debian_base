@@ -36,6 +36,7 @@ debian_packages:
   - software-properties-common
   - neovim
   - gnupg
+  - age
   - lshw
   - parted
   - ifenslave
