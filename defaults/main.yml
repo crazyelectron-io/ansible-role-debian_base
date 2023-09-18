@@ -41,6 +41,7 @@ debian_packages:
   - parted
   - ifenslave
   - bridge-utils
+  - apache2-utils
   - ethtool
   - lsof
   - firmware-linux-nonfree
