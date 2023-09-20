@@ -4,7 +4,7 @@
 galaxy_info:
   role_name: debian_base
   author: crazyelectron-io
-  description: Setup the basic packages and configuration on a 'bare' Debian 12 installation (with just SSH and sudo enabled)
+  description: Setup the basic packages and configuration on a 'bare' Debian 11/12 installation (with just SSH and sudo enabled)
   company: 'clouds+more'
   license: license (GPLv3)
   min_ansible_version: '2.9'

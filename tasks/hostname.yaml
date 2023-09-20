@@ -1,7 +1,7 @@
-# file: roles/debian-base/tasks/hostname.yaml
+# file: debian-base/tasks/hostname.yaml
 # synopsis: set hostname (optionally)
 ---
-- name: Chnage the hostname to inventory name
+- name: Change the hostname to inventory name
   block:
     - name: Set the hostname
       ansible.builtin.hostname:

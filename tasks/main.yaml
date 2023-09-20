@@ -1,7 +1,7 @@
-# file: roles/debian-base/tasks/main.yaml
+# file: /debian-base/tasks/main.yaml
 # synopsis: update and configure debian
 ---
-- name: Update Debian packages
+- name: Update all Debian packages to the latest version
   ansible.builtin.include_role:
     name: debian-upgrade
 
@@ -50,15 +50,15 @@
 - import_tasks: install-ufw.yaml
 
 - name: P10k | Include p10k prompt style variables
-  include_vars: "{{ p10k_style[p10k_prompt_style] }}.yml"
+  include_vars: "{{ p10k_style[p10k_prompt_style] }}.yaml"
 
 - import_tasks: install-zsh.yaml
 
 - name: Install and configure p10k
   block:
-    - include_tasks: "p10k-install.yml"
-    - include_tasks: "p10k-fonts.yml"
-    - include_tasks: "p10k-configure.yml"
+    - include_tasks: "p10k-install.yaml"
+    - include_tasks: "p10k-fonts.yaml"
+    - include_tasks: "p10k-configure.yaml"
   when: install_p10k
 
 - name: Setup Neofetch

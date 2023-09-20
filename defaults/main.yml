@@ -1,4 +1,4 @@
-# file: debian_base/default/main.yaml
+# file: defaults/main.yaml
 # synopsis: defaults file for debian-base
 ---
 # Upgrade Debian packages
