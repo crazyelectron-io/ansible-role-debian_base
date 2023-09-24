@@ -47,6 +47,7 @@ debian_packages:
   - firmware-linux-nonfree
   - acl
   - whois
+  - bsdmainutils
   - ufw
   # - python3-pip
   # - apache2-utils
