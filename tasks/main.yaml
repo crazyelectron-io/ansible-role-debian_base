@@ -45,6 +45,7 @@
 - import_tasks: disable-yama.yaml
 
 - import_tasks: sensors.yaml
+  when: not install_in_vm
 
 - import_tasks: install-ufw.yaml
 
