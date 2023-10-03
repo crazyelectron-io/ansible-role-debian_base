@@ -1,6 +1,8 @@
 # file: /debian-base/tasks/main.yaml
 # synopsis: update and configure debian
 ---
+- include_tasks: non-free-sources.yaml
+
 - name: Update all Debian packages to the latest version
   ansible.builtin.include_role:
     name: debian-upgrade
@@ -37,9 +39,6 @@
   notify:
     - reboot vm
   when: install_in_vm
-
-- import_tasks: install-lh-prereq.yaml
-  when: install_lh_prereq
 
 - import_tasks: disable-ipv6.yaml
 
