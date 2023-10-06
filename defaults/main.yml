@@ -50,12 +50,7 @@ debian_packages:
   - bsdmainutils
   - ufw
   # - python3-pip
-  # - apache2-utils
-
-# Debian packages for reading hardware sensors
-sensor_packages:
-  - smartmontools
-  - lm-sensors
+  - apache2-utils
 
 # Change the hostname
 set_hostname: false

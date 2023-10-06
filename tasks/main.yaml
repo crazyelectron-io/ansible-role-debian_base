@@ -44,7 +44,7 @@
 
 - import_tasks: disable-yama.yaml
 
-- import_tasks: sensors.yaml
+- import_tasks: linux-sensors.yaml
   when: not install_in_vm
 
 - import_tasks: install-ufw.yaml
@@ -84,13 +84,6 @@
 - name: Remove dependencies that are no longer required
   ansible.builtin.apt:
     autoremove: yes
-
-# TODO: echo \"Samsung SSD 870 QVO 8TB\" 190 C \"Samsung SSD 870 QVO 8TB\" | sudo tee -a /etc/hddtemp.db
-# - name: Add Samsung SSD to hddtemp database
-#   ansible.builtin.lineinfile:
-#     path: /etc/hddtemp.db
-#     regexp: '^870 QVO 8TB'
-#     line: \"Samsung SSD 870 QVO 8TB\" 190 C \"Samsung SSD 870 QVO 8TB\"
 
 - ansible.builtin.include_role:
     name: reboot

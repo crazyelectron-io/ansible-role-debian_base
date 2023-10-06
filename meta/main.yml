@@ -21,3 +21,5 @@ dependencies:
   name: reboot
 - src: git+https://github.com/crazyelectron-io/ansible-role-debian_upgrade.git
   name: debian-upgrade
+- src: git+https://github.com/crazyelectron-io/ansible-role-linux_sensors.git
+  name: linux-sensors
