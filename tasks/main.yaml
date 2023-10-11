@@ -9,9 +9,8 @@
 
 - name: Deploy base Debian packages
   ansible.builtin.package:
-    name: "{{ item }}"
+    name: "{{ debian_packages }}"
     state: present
-  with_items: "{{ debian_packages }}"
 
 - include_tasks: hostname.yaml
 
@@ -44,8 +43,22 @@
 
 - import_tasks: disable-yama.yaml
 
-- import_tasks: linux-sensors.yaml
+- ansible.builtin.include_role:
+    name: linux-sensors.yaml
   when: not install_in_vm
+
+- name: Enable netfilter module
+  block:
+    - name: Load br_netfilter module
+      community.general.modprobe:
+        name: br_netfilter
+        state: present
+    - name: Make netfilter module permanent
+      ansible.builtin.lineinfile:
+        path: /etc/modules
+        regexp: '^br_netfilter'
+        line: br_netfilter
+  when: load_netfilter
 
 - import_tasks: install-ufw.yaml
 
