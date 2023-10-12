@@ -55,6 +55,7 @@ debian_packages:
   - ufw
   # - python3-pip
   - apache2-utils
+  - lvm2
 
 # Change the hostname
 set_hostname: false
