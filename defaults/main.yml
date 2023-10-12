@@ -10,6 +10,9 @@ install_in_vm: false
 # Install optional Longhorn prerequisites
 install_lh_prereq: false
 
+# Enable UFW firewall (default is true)
+enable_ufw: true
+
 # Install P10k (defaults to false)
 install_p10k: false
 
