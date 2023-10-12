@@ -35,6 +35,7 @@ debian_packages:
   - tcpdump
   - software-properties-common
   - neovim
+  - tree
   - gnupg
   - age
   - lshw
