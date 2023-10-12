@@ -10,6 +10,12 @@
     port: ssh
     proto: tcp
 
-- name: Enable UFW
+- name: Enable UFW (conditionally)
   community.general.ufw:
     state: enabled
+  when: enable_ufw
+
+- name: Disabel UFW (conditionally)
+  community.general.ufw:
+    state: disabled
+  when: not enable_ufw
