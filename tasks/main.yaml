@@ -42,7 +42,7 @@
 - import_tasks: disable-yama.yaml
 
 - ansible.builtin.include_role:
-    name: linux-sensors.yaml
+    name: linux-sensors
   when: not install_in_vm
 
 - name: Enable netfilter module
