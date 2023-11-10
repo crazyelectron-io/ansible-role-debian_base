@@ -1,8 +1,6 @@
 # file: /debian-base/tasks/main.yaml
 # synopsis: update and configure debian
 ---
-- include_tasks: non-free-sources.yaml
-
 - name: Update all Debian packages to the latest version
   ansible.builtin.include_role:
     name: debian-upgrade
