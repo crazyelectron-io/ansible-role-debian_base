@@ -78,5 +78,6 @@ This role depends on the `reboot` ans `debiab-update` role which is specified as
 ## Workflow to deploy from the project
 
 1. Clone the project repository
-2. Download the external roles: `ansible-galaxy install -r roles/requirements`
-3. Launch your playbook: `ansible-playbook -i inventories/dev some_playbook.yml [-u ANSIBLE_USER]`
+2. Adjust and rename the requirements example file.
+3. Download the external roles: `ansible-galaxy install -r roles/requirements`
+4. Launch your playbook: `ansible-playbook -i inventories/dev some_playbook.yml [-u ANSIBLE_USER]`
