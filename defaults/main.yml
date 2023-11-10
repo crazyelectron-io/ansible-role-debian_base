@@ -53,7 +53,7 @@ debian_packages:
   - whois
   - bsdmainutils
   - ufw
-  # - python3-pip
+  - btop
   - apache2-utils
   - lvm2
 
