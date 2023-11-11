@@ -1,10 +1,6 @@
 # file: /debian-base/tasks/main.yaml
 # synopsis: update and configure debian
 ---
-- name: Update all Debian packages to the latest version
-  ansible.builtin.include_role:
-    name: debian-upgrade
-
 - name: Deploy base Debian packages
   ansible.builtin.package:
     name: "{{ debian_packages }}"
