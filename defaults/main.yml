@@ -1,0 +1,120 @@
+# file: defaults/main.yaml
+# synopsis: defaults file for debian-base
+---
+# Are we installing in a KVM VM (to install the QEMU agent or hardware sensors)?
+install_in_vm: false
+
+# Install optional Longhorn prerequisites
+install_lh_prereq: false
+
+# Enable UFW firewall (default is true)
+enable_ufw: true
+
+# Install P10k (defaults to false)
+install_p10k: false
+
+# Install Neofetch (defaults to false)
+install_neofetch: false
+
+# The locale the set for the ansible user *blank will not set the locale)
+my_locale: "en_US.UTF-8"
+
+# Set the required timezone
+system_timezone: Europe/Amsterdam
+
+# Change the hostname
+set_hostname: false
+
+# NTP Pool to use
+ntp_pool: pool.ntp.org
+
+# Default set of Debian packages to install
+debian_packages:
+  - htop
+  - unzip
+  - zip
+  - mc
+  - nmap
+  - tcpdump
+  - software-properties-common
+  - neovim
+  - tree
+  - gnupg
+  - age
+  - lshw
+  - parted
+  - ifenslave
+  - bridge-utils
+  - apache2-utils
+  - ethtool
+  - lsof
+  - firmware-linux-nonfree
+  - acl
+  - whois
+  - bsdmainutils
+  - ufw
+  - btop
+  - apache2-utils
+  - lvm2
+
+# Powerlevel10k Git repository url
+p10k_repository_url: 'https://github.com/romkatv/powerlevel10k.git'
+
+# Install p10k for the following users
+# Default: the user running Ansible
+p10k_users:
+  - "{{ ansible_user_id }}"
+
+# Zsh plugin used, zsh, ohmyzsh, prezto, Zim, etc..
+# All plugin names can be found here https://github.com/romkatv/powerlevel10k#installation
+zsh_plugin: zsh
+
+# Setup p10k theme to use
+# Valid values: lean, classic, rainbow, pure
+p10k_prompt_style: "lean"
+
+# Show current time
+# Valid values: no, 24-hour, 12-hour
+p10k_prompt_time: "24-hour"
+
+# Prompt sperator
+# Valid values: angled, vertical, slanted, round
+p10k_prompt_separator: "angled"
+
+# Prompt heads
+# Valid values: sharp, blurred, slanted, round
+p10k_prompt_head: "sharp"
+
+# Prompt tails
+# Valid values: flat, blurred, sharp, slanted, round
+p10k_prompt_tails: flat
+
+# Terminal prompt height
+# Valid values: one-line, two-lines
+p10k_prompt_height: two-lines
+
+# Prompt connection, only used if "p10k_prompt_height" value is "two-lines"
+# Valid values: disconnected, dotted, solid
+p10k_prompt_connection: dotted
+
+# Prompt connection color, only used if
+# "p10k_prompt_connection" value is "dotted" or "solid"
+# or "p10k_prompt_frame" is not "no"
+# Valid values: lightest, light, dark, darkest, black, white, green, blue
+p10k_prompt_connection_color: "dark"
+
+# Prompt frame connection
+# Valid values: no, left, right, full
+p10k_prompt_frame: left
+
+# Sparse prompt with an empty line before promp
+# Valid values: compact, sparse
+p10k_prompt_spacing: compact
+
+# Terminal flow
+# Valid values: concise, fluent
+p10k_prompt_flow: concise
+
+# Enable transient prompt
+# Valid values: yes, no
+p10k_transient_prompt: "no"

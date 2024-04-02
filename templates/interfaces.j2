@@ -1,0 +1,41 @@
+# file: /etc/network/interfaces
+# synopsis: network interface definitions for the Cluster/Management servers
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+  dns-nameservers 127.0.0.1
+  dns-search {{ main_domain }}
+
+# The DNS/DHCP network interface
+auto {{ nic1 }}
+iface {{ nic1 }} inet manual
+auto {{ nic2 }}
+iface {{ nic2 }} inet manual
+auto bond0
+iface bond0 inet static
+	address {{ cidr_vlan0 }}
+	gateway {{ gateway }}
+	dns-nameservers {{ primary_dns }} {{ public_dns }}
+	dns-search {{ main_domain }}
+	bond-slaves {{ nic1 }} {{ nic2 }}
+	bond-mode 4
+	bond-miimon 100
+	bond-downdelay 200
+	bond-updelay 400
+
+# The Cluster network interface
+auto {{ nic3 }}
+iface {{ nic3 }} inet manual
+auto {{ nic4 }}
+iface {{ nic4 }} inet manual
+auto bond100
+iface bond100 inet static
+	address {{ cidr_vlan100 }}
+	dns-nameservers {{ primary_dns }} {{ public_dns }}
+	dns-search {{ main_domain }}
+	bond-slaves {{ nic3 }} {{ nic4 }}
+	bond-mode 4
+	bond-miimon 100
+	bond-downdelay 200
+	bond-updelay 400

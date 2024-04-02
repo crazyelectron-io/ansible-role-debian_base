@@ -1,0 +1,25 @@
+# file: meta/main.yml
+# synopsis: define dependencies
+---
+galaxy_info:
+  role_name: debian_base
+  author: crazyelectron-io
+  description: Setup the basic packages and configuration on a 'bare' Debian 11/12 installation (with just SSH and sudo enabled)
+  company: 'clouds+more'
+  license: license (GPLv3)
+  min_ansible_version: '2.9'
+  platforms:
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+  galaxy_tags:
+    - debian
+
+dependencies:
+- src: git+https://github.com/crazyelectron-io/ansible-role-reboot.git
+  name: reboot
+- src: git+https://github.com/crazyelectron-io/ansible-role-debian_upgrade.git
+  name: debian-upgrade
+- src: git+https://github.com/crazyelectron-io/ansible-role-linux_sensors.git
+  name: linux-sensors

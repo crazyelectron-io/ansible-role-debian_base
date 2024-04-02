@@ -1,0 +1,19 @@
+---
+- name: Copy network interfaces template, replacing variables
+  ansible.builtin.template:
+    src: interfaces.j2
+    dest: /etc/network/interfaces
+    owner: root
+    group: root
+    mode: '0644'
+  loop: "{{ groups['master'] }}"
+  register: network_update
+
+- name: Reboot when network interface changed
+  ansible.builtin.copy:
+    content: ""
+    dest: /var/run/reboot-required
+    force: false
+    group: root
+    owner: root
+  when: network_update.changed

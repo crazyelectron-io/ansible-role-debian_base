@@ -1,0 +1,92 @@
+# file: /debian-base/tasks/main.yaml
+# synopsis: update and configure debian
+---
+- name: Deploy base Debian packages
+  ansible.builtin.package:
+    name: "{{ debian_packages }}"
+    state: present
+
+- include_tasks: hostname.yaml
+
+- name: Set local timezone
+  timezone:
+    name: "{{ system_timezone }}"
+
+- name: Configure locale (if specified)
+  block:
+  - community.general.locale_gen:
+      name: "{{ my_locale }}"
+      state: present
+  - blockinfile:
+      path: "/home/{{ shell_user }}/.bashrc"
+      block: |
+        # set the locale
+        LANG="{{ my_locale }}"
+        LC_CTYPE="{{ my_locale }}"
+        LC_ALL="{{ my_locale }}"
+  when: not (my_locale == "")
+
+- import_tasks: install-qemu-agent.yaml
+  notify:
+    - reboot vm
+  when: install_in_vm
+
+- import_tasks: disable-ipv6.yaml
+
+- import_tasks: disable-yama.yaml
+
+- name: Enable netfilter module
+  block:
+    - name: Load br_netfilter module
+      community.general.modprobe:
+        name: br_netfilter
+        state: present
+    - name: Make netfilter module permanent
+      ansible.builtin.lineinfile:
+        path: /etc/modules
+        regexp: '^br_netfilter'
+        line: br_netfilter
+  when: load_netfilter
+
+- import_tasks: install-ufw.yaml
+
+- import_tasks: network-interfaces.yaml
+
+- name: P10k | Include p10k prompt style variables
+  include_vars: "{{ p10k_style[p10k_prompt_style] }}.yaml"
+
+- import_tasks: install-zsh.yaml
+
+- name: Install and configure p10k
+  block:
+    - include_tasks: "p10k-install.yaml"
+    - include_tasks: "p10k-fonts.yaml"
+    - include_tasks: "p10k-configure.yaml"
+  when: install_p10k
+
+- name: Setup Neofetch
+  block:
+    - name: Install Neofetch
+      ansible.builtin.package:
+        name: neofetch
+        state: present
+    - name: Enable Neofetch
+      ansible.builtin.blockinfile:
+        path: "{{ p10k_zshrc_config[zsh_plugin]['zsh_file'] }}"
+        block: |
+          # Run neofetch at login and before Powerlevel10k instant prompt
+          neofetch
+        insertbefore: BOF
+        marker_begin: "BEGIN NEOFETCH CONFIG FILE"
+        marker_end: "END NEOFETCH CONFIG FILE"
+        state: present
+      become: true
+      become_user: "{{ shell_user }}"
+  when: install_neofetch
+
+- name: Remove dependencies that are no longer required
+  ansible.builtin.apt:
+    autoremove: yes
+
+- ansible.builtin.include_role:
+    name: reboot
