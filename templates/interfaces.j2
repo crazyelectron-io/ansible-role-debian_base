@@ -8,27 +8,45 @@ iface lo inet loopback
   dns-search {{ main_domain }}
 
 # The DNS/DHCP network interface
+{% if nic1 is defined %}
 auto {{ nic1 }}
 iface {{ nic1 }} inet manual
+{% endif %}
+{% if nic2 is defined %}
 auto {{ nic2 }}
 iface {{ nic2 }} inet manual
+{% endif %}
+{% if bond0 is defined %}
 auto bond0
 iface bond0 inet static
 	address {{ cidr_vlan0 }}
 	gateway {{ gateway }}
 	dns-nameservers {{ primary_dns }} {{ public_dns }}
 	dns-search {{ main_domain }}
-	bond-slaves {{ nic1 }} {{ nic2 }}
+	bond-slaves {{ bond0 }}
 	bond-mode 4
 	bond-miimon 100
 	bond-downdelay 200
 	bond-updelay 400
+{% else %}
+auto {{ nic1 }}
+iface {{ nic1 }} inet static
+    address {{ cidr_vlan0 }}
+    gateway {{ gateway }}
+    dns-nameservers {{ primary_dns }} {{ public_dns }}
+    dns-search {{ main_domain }}
+{% endif %}
 
 # The Cluster network interface
+{% if nic3 is defined %}
 auto {{ nic3 }}
 iface {{ nic3 }} inet manual
+{% endif %}
+{% if nic4 is defined %}
 auto {{ nic4 }}
 iface {{ nic4 }} inet manual
+{% endif %}
+{% if bond100 is defined %}
 auto bond100
 iface bond100 inet static
 	address {{ cidr_vlan100 }}
@@ -39,3 +57,4 @@ iface bond100 inet static
 	bond-miimon 100
 	bond-downdelay 200
 	bond-updelay 400
+{% endif %}
