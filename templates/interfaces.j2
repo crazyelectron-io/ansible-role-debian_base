@@ -5,56 +5,63 @@
 auto lo
 iface lo inet loopback
   dns-nameservers 127.0.0.1
-  dns-search {{ main_domain }}
+  dns-search {{search_domain}}
 
-# The DNS/DHCP network interface
+# The main network interface
 {% if nic1 is defined %}
-auto {{ nic1 }}
-iface {{ nic1 }} inet manual
+auto {{nic1}}
+iface {{nic1}} inet manual
 {% endif %}
 {% if nic2 is defined %}
-auto {{ nic2 }}
-iface {{ nic2 }} inet manual
+auto {{nic2}}
+iface {{nic2}} inet manual
 {% endif %}
-{% if bond0 is defined %}
-auto bond0
-iface bond0 inet static
-	address {{ cidr_vlan0 }}
-	gateway {{ gateway }}
-	dns-nameservers {{ primary_dns }} {{ public_dns }}
-	dns-search {{ main_domain }}
-	bond-slaves {{ bond0 }}
-	bond-mode 4
+{% if nic3 is defined %}
+auto {{nic3}}
+iface {{nic3}} inet manual
+{% endif %}
+{% if nic4 is defined %}
+auto {{nic4}}
+iface {{nic4}} inet manual
+{% endif %}
+{% if bond0_name is defined %}
+auto {{bond0_name}}
+iface {{bond0_name}} inet static
+	address {{bond0_cidr}}
+	gateway {{bond0_gw}}
+	{% if secondary_dns is defined %}
+	dns-nameservers {{primary_dns}} {{secondary_dns}}
+	{% else %}
+	dns-nameservers {{primary_dns}}
+	{% endif %}
+	dns-search {{search_domain}}
+	bond-slaves {{bond0_slaves}}
+	bond-mode {{bond0_mode}}
 	bond-miimon 100
 	bond-downdelay 200
 	bond-updelay 400
 {% else %}
-auto {{ nic1 }}
-iface {{ nic1 }} inet static
-    address {{ cidr_vlan0 }}
-    gateway {{ gateway }}
-    dns-nameservers {{ primary_dns }} {{ public_dns }}
-    dns-search {{ main_domain }}
+auto {{nic1}}
+iface {{nic1}} inet static
+    address {{bond0_cidr}}
+    gateway {{}}
+	{% if secondary_dns is defined %}
+	dns-nameservers {{primary_dns}} {{secondary_dns}}
+	{% else %}
+	dns-nameservers {{primary_dns}}
+	{% endif %}
+    dns-search {{search_domain}}
 {% endif %}
 
-# The Cluster network interface
-{% if nic3 is defined %}
-auto {{ nic3 }}
-iface {{ nic3 }} inet manual
-{% endif %}
-{% if nic4 is defined %}
-auto {{ nic4 }}
-iface {{ nic4 }} inet manual
-{% endif %}
-{% if bond100 is defined %}
-auto bond100
-iface bond100 inet static
-	address {{ cidr_vlan100 }}
-	dns-nameservers {{ primary_dns }} {{ public_dns }}
-	dns-search {{ main_domain }}
-	bond-slaves {{ nic3 }} {{ nic4 }}
-	bond-mode 4
-	bond-miimon 100
-	bond-downdelay 200
-	bond-updelay 400
+# The Cluster VLAN interface
+{% if vland_id is defined %}
+auto {{bond0_name}}.{{vlan_id}}
+iface {{bond0_name}}.{{vlan_id}} inet manual
+	address {{vlan_cidr}}
+	{% if secondary_dns is defined %}
+	dns-nameservers {{primary_dns}} {{secondary_dns}}
+	{% else %}
+	dns-nameservers {{primary_dns}}
+	{% endif %}
+	dns-search {{search_domain}}
 {% endif %}
