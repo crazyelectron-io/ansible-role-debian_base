@@ -44,7 +44,7 @@ iface {{bond0_name}} inet static
 auto {{nic1}}
 iface {{nic1}} inet static
     address {{bond0_cidr}}
-    gateway {{}}
+    gateway {{bond0_gw}}
 	{% if secondary_dns is defined %}
 	dns-nameservers {{primary_dns}} {{secondary_dns}}
 	{% else %}
