@@ -5,6 +5,8 @@ Ansible role to setup a 'freshly' installed Debian 12 server (non-GUI).
 > Be aware that this role is highly opinionated and fits my preferences and way of working.
 > It may or may not be suitable for your needs.
 
+Use of NIC bonding requires some extra attention.
+
 > Due to limitations in the Debian autoinstall preseed mechanism, it is necessary to set the network configuration to simple switching mode on the two NIC's that are used for Ansible SSH access (`eno1` and `eno3`) before running this playbook.
 > After this playbook has completed, the network configuration on the Debian hosts is changed to bonding (LACP) and the network switch must be set to that configuration as well before the next playbooks can be deployed.
 
