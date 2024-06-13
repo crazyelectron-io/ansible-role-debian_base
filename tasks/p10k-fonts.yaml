@@ -3,16 +3,16 @@
 ---
 - name: Create fonts directory
   become: true
-  file:
-    path: "{{ fonts_path }}"
+  ansible.builtin.file:
+    path: "{{fonts_path}}"
     mode: '0755'
     state: directory
 
 - name: Copy powerlevel10k recommended fonts
   become: true
-  copy:
-    src: "fonts/{{ item }}"
-    dest: "{{ fonts_path }}/{{ item }}"
+  ansible.builtin.copy:
+    src: "fonts/{{item}}"
+    dest: "{{fonts_path}}/{{item}}"
     mode: '0644'
   loop:
     - MesloLGS NF Bold Italic.ttf

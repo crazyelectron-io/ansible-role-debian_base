@@ -1,34 +1,34 @@
 ---
 - name: ZSH | Install dependencies
-  package:
-    name: '{{ p10k_dependencies }}'
+  ansible.builtin.package:
+    name: '{{p10k_dependencies}}'
     state: present
 
 - name: ZSH | Set permissions of oh-my-zsh for users
   become: true
   file:
-    path: '/home/{{ shell_user }}/.oh-my-zsh'
+    path: '/home/{{shell_user}}/.oh-my-zsh'
     # Prevent the cloned repository from having insecure permissions. Failing to do
     # so causes compinit() calls to fail with "command not found: compdef" errors
     # for users with insecure umasks (e.g., "002", allowing group writability).
     mode: 'go-w'
-    owner: "{{ shell_user }}"
-    group: "{{ shell_user }}"
+    owner: "{{shell_user}}"
+    group: "{{shell_user}}"
     recurse: yes
 
 # - name: ZSH | Set default shell for user
 #   become: yes
 #   user:
-#     name: '{{ shell_user }}'
+#     name: '{{shell_user}}'
 #     shell: /bin/zsh
 #   changed_when: false
 
 - name: ZSH | Write .zshrc
   become: true
-  become_user: '{{ shell_user }}'
+  become_user: '{{shell_user}}'
   template:
     src: zshrc.j2
-    dest: '/home/{{ shell_user }}/.zshrc'
+    dest: '/home/{{shell_user}}/.zshrc'
     mode: 'u=rw,go=r'
     force: no
     # backup: yes

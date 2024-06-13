@@ -1,12 +1,12 @@
 ---
-- name: Copy network interfaces template, replacing variables
+- name: Copy network interfaces template (replacing variables)
   ansible.builtin.template:
     src: interfaces.j2
     dest: /etc/network/interfaces
     owner: root
     group: root
     mode: '0644'
-  loop: "{{ groups['master'] }}"
+  loop: "{{groups['cluster']}}"
   register: network_update
 
 - name: Reboot when network interface changed

@@ -2,7 +2,7 @@
 # synopsis: optionally install the qemu agent when running inside kvm vm
 ---
 - name: QEMU | Install guest agent
-  package:
+  ansible.builtin.package:
     name: 'qemu-guest-agent'
     state: present
   when: install_in_vm

@@ -12,7 +12,7 @@ Ansible role to setup a 'freshly' installed Debian 12 server (non-GUI).
 
 ### Mandatory variables
 
-`main_domain` _must_ be defined to create an entry in the Debian `/etc/hosts` file.
+`internal_domain` _must_ be defined to create an entry in the Debian `/etc/hosts` file.
 
 `shell_user` _must_ be defined for user-based configuration (like ZSH, Locale, etc.).
 
@@ -23,7 +23,7 @@ These variables can be specified in the `hosts.yaml` inventory file, in the `gro
   become: true
   gather_facts: true
   vars:
-    main_domain: example.com
+    internal_domain: example.com
     shell_user: myuser
   roles:
     - debian-base

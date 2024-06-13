@@ -5,7 +5,7 @@
   block:
     - name: Set the hostname
       ansible.builtin.hostname:
-        name: "{{ inventory_hostname }}"
+        name: "{{inventory_hostname}}"
         use: systemd
       register: new_hostname
       notify:
@@ -15,6 +15,6 @@
       ansible.builtin.lineinfile:
         path: /etc/hosts
         state: present
-        regexp: "{{ inventory_hostname }}"
-        line: '127.0.1.1 {{ inventory_hostname }}.{{ main_domain }} {{ inventory_hostname }}'
+        regexp: "{{inventory_hostname}}"
+        line: '127.0.1.1 {{ nventory_hostname}}.{{internal_domain}} {{inventory_hostname}}'
   when: set_hostname
