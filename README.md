@@ -12,7 +12,7 @@ Ansible role to setup a 'freshly' installed Debian 12 server (non-GUI).
 
 ### Mandatory variables
 
-`internal_domain` _must_ be defined to create an entry in the Debian `/etc/hosts` file.
+`search_domain` _must_ be defined to create an entry in the Debian `/etc/hosts` file and configure the network interface.
 
 `shell_user` _must_ be defined for user-based configuration (like ZSH, Locale, etc.).
 
@@ -23,7 +23,7 @@ These variables can be specified in the `hosts.yaml` inventory file, in the `gro
   become: true
   gather_facts: true
   vars:
-    internal_domain: example.com
+    search_domain: example.local
     shell_user: myuser
   roles:
     - debian-base
@@ -36,21 +36,21 @@ In a `inventory/hosts.yaml` file:
 ---
 all:
   vars:
-    main_domain: example.com
+    search_domain: example.local
     shell_user: myuser
     ...
   children:
   ...
 ```
 
-Or in a `inventory/group_vars/all.yaml` file:
+Or in a `inventory/group_vars/all.yaml` file (recommended):
 
 ```yaml
 ### --- Debian_base role parameters
 # Shell user for Ansible
 shell_user: myuser
 # The primary domain
-main_domain: example.com
+search_domain: example.local
 ```
 
 ### Important optional parameters (with defaults)
@@ -71,7 +71,9 @@ main_domain: example.com
 
 `load_netfilter: true` - Needed for Kubernetes network.
 
-`primary_dns: 10.0.0.1` - Used for NIC configuration.
+`primary_dns: 10.0.0.1` - Used for network inteface configuration.
+
+`secondary_dns` - usef for network interface configuration (no default; ommitted if not specified).
 
 `public_dns: 1.1.1.1 8.8.8.8` - Used for NIC configuration.
 
@@ -96,7 +98,7 @@ Because these roles will not be updated locally when the repository is changed, 
 
 ## Dependencies
 
-This role depends on the `reboot`, `linux-sensors` and `debian-update` role which is specified as dependency (see `./meta/main.yaml`) and included automatically.
+This role depends on the `reboot`, `linux-sensors` and `debian-update` roles which are specified as dependency (see `./meta/main.yaml`) and included automatically.
 
 ## Workflow to deploy from the project
 

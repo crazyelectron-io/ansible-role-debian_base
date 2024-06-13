@@ -16,5 +16,5 @@
         path: /etc/hosts
         state: present
         regexp: "{{inventory_hostname}}"
-        line: '127.0.1.1 {{ nventory_hostname}}.{{internal_domain}} {{inventory_hostname}}'
+        line: '127.0.1.1 {{inventory_hostname}}.{{search_domain}} {{inventory_hostname}}'
   when: set_hostname
