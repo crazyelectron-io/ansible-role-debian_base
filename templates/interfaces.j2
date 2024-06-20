@@ -30,10 +30,7 @@ iface {{bond0_name}} inet static
 	address {{bond0_cidr}}
 	gateway {{bond0_gw}}
 	{% if secondary_dns is defined %}
-	dns-nameservers {{primary_dns}} {{secondary_dns}}
-	{% else %}
-	dns-nameservers {{primary_dns}}
-	{% endif %}
+	dns-nameservers {{primary_dns}} {% if secondary_dns is defined %}{{secondary_dns}}{% endif %}
 	dns-search {{search_domain}}
 	bond-slaves {{bond0_slaves}}
 	bond-mode {{bond0_mode}}
