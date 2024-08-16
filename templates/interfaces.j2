@@ -52,7 +52,7 @@ iface {{nic1}} inet static
 {% endif %}
 
 # The Cluster VLAN interface
-{% if vland_id is defined %}
+{% if vlan_id is defined %}
 auto {{bond0_name}}.{{vlan_id}}
 iface {{bond0_name}}.{{vlan_id}} inet manual
 	address {{vlan_cidr}}
