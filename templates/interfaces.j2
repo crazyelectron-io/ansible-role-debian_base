@@ -12,25 +12,29 @@ iface lo inet loopback
 auto {{nic1}}
 iface {{nic1}} inet manual
 {% endif %}
+
 {% if nic2 is defined %}
 auto {{nic2}}
 iface {{nic2}} inet manual
 {% endif %}
+
 {% if nic3 is defined %}
 auto {{nic3}}
 iface {{nic3}} inet manual
 {% endif %}
+
 {% if nic4 is defined %}
 auto {{nic4}}
 iface {{nic4}} inet manual
 {% endif %}
+
 {% if bond0_name is defined %}
 auto {{bond0_name}}
 iface {{bond0_name}} inet static
 	address {{bond0_cidr}}
 	gateway {{bond0_gw}}
-	{% if secondary_dns is defined %}
 	dns-nameservers {{primary_dns}} {% if secondary_dns is defined %}{{secondary_dns}}{% endif %}
+
 	dns-search {{search_domain}}
 	bond-slaves {{bond0_slaves}}
 	bond-mode {{bond0_mode}}
@@ -42,11 +46,8 @@ auto {{nic1}}
 iface {{nic1}} inet static
     address {{bond0_cidr}}
     gateway {{bond0_gw}}
-	{% if secondary_dns is defined %}
-	dns-nameservers {{primary_dns}} {{secondary_dns}}
-	{% else %}
-	dns-nameservers {{primary_dns}}
-	{% endif %}
+	dns-nameservers {{primary_dns}} {% if secondary_dns is defined %}{{secondary_dns}}{% endif %}
+
     dns-search {{search_domain}}
 {% endif %}
 
@@ -55,10 +56,7 @@ iface {{nic1}} inet static
 auto {{bond0_name}}.{{vlan_id}}
 iface {{bond0_name}}.{{vlan_id}} inet manual
 	address {{vlan_cidr}}
-	{% if secondary_dns is defined %}
-	dns-nameservers {{primary_dns}} {{secondary_dns}}
-	{% else %}
-	dns-nameservers {{primary_dns}}
-	{% endif %}
+	dns-nameservers {{primary_dns}} {% if secondary_dns is defined %}{{secondary_dns}}{% endif %}
+
 	dns-search {{search_domain}}
 {% endif %}
