@@ -54,7 +54,7 @@ iface {{nic1}} inet static
 # The Cluster VLAN interface
 {% if vlan_id is defined %}
 auto {{bond0_name}}.{{vlan_id}}
-iface {{bond0_name}}.{{vlan_id}} inet manual
+iface {{bond0_name}}.{{vlan_id}} inet static
 	address {{vlan_cidr}}
 	dns-nameservers {{primary_dns}} {% if secondary_dns is defined %}{{secondary_dns}}{% endif %}
 
